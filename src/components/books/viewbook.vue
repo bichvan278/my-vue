@@ -57,38 +57,6 @@ export default {
   name: 'viewbook',
   data(){
       return{
-		//   book:{},
-        //   books:[
-        //       {	
-		// 		  id :1,
-        //           name: 'C# in Depth',
-        //           auth: 'Jonh Skeet',
-        //           type: 'C#, Dev',
-        //           date: 'march 2019'
-        //       },
-        //       {
-		// 		  id :2,
-        //           name: 'Efective Java',
-        //           auth: 'Joshua Bloch',
-        //           type: 'Java',
-        //           date: 'march 2019'
-        //       },
-        //       {
-		// 		  id :3,
-        //           name: 'Clean code',
-        //           auth: 'Robert C. Martin',
-        //           type: 'C#, Dev',
-        //           date: 'march 2019'
-        //       },
-        //       {
-		// 		  id :4,
-        //           name: 'Clean Architecture',
-        //           auth: 'Robert C. Martin',
-        //           type: 'Software',
-        //           date: 'march 2019'
-        //       },
-
-        //   ],
 		books: []
       }
 },
