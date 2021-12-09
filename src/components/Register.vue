@@ -34,7 +34,7 @@
                         <div class="form-group" text-center>
                           <input type="submit" class="fadeIn fourth" value="Register">
                         </div>
-                        
+
                       </div>
                     </form>
                 </div>
@@ -46,12 +46,12 @@
 </template>
 
 <script>
-import {register} from "@/services/CouchApiService.js"
+import {register} from '@/services/CouchApiService.js'
 
 export default {
   name: 'Register',
-  data(){
-    return{
+  data () {
+    return {
       user: {
         fullname: '',
         email: '',
@@ -62,20 +62,20 @@ export default {
     }
   },
   methods: {
-    async submitRegister(){
-      const fullname = this.user.fullname;
-      const email = this.user.email;
-      const phone = this.user.phone;
-      const username = this.user.username;
-      const password = this.user.password;
+    async submitRegister () {
+      const fullname = this.user.fullname
+      const email = this.user.email
+      const phone = this.user.phone
+      const username = this.user.username
+      const password = this.user.password
 
-      const response = await register(fullname, email, phone, username, password);
-      console.warn(response);
-      if(response.status === 201){
-          alert("Register is completely!")
-          this.$router.replace({ name: 'Login' });
-      }else{
-          alert("Try again!")
+      const response = await register(fullname, email, phone, username, password)
+      console.warn(response)
+      if (response.status === 201) {
+        alert('Register is completely!')
+        this.$router.replace({ name: 'Login' })
+      } else {
+        alert('Try again!')
       }
     }
   }
@@ -88,7 +88,7 @@ h1 {
   font-weight: 600;
   text-transform: uppercase;
   display:inline-block;
-  margin: 10px 8px 10px 8px; 
+  margin: 10px 8px 10px 8px;
   color: #eb437e;
 }
 
@@ -200,7 +200,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
 
 *:focus {
     outline: none;
-} 
+}
 
 #icon {
   width:60%;

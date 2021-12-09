@@ -68,6 +68,7 @@ export default {
       console.log('new book:', response)
       if (response.status === 201) {
         alert('Add new book successful!')
+        this.$router.replace({ name: 'viewbook' });
       } else {
         alert('Try again!')
       }
@@ -86,10 +87,11 @@ export default {
     background-color: #0062cc;
     border: none;
     cursor: pointer;
-    margin-left: 300px;
+    margin-left: 15px;
+    margin-top: 15px;
 }
 .frmAddbook{
     width: 60%;
-    margin-left: 220px;
+    margin: 10px 220px;
 }
 </style>

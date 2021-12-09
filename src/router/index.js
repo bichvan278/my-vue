@@ -5,8 +5,8 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import AdminPage from '@/components/User/AdminPage'
 import viewbook from '@/components/books/viewbook'
+import AddBook from '@/components/books/AddBook'
 import Editbook from '@/components/books/Editbook'
-
 
 Vue.use(Router)
 
@@ -39,8 +39,13 @@ export default new Router({
       component: viewbook
     },
     {
+      path: '/AddBook',
+      name: 'addbook',
+      component: AddBook
+    },
+    {
       path: '/Editbook',
-      name: 'Editbook',
+      name: 'editbook',
       component: Editbook
     }
   ]
