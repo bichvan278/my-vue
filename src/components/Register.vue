@@ -57,7 +57,8 @@ export default {
         email: '',
         phone: '',
         username: '',
-        password: ''
+        password: '',
+        role: 'Member'
       }
     }
   },
@@ -68,11 +69,13 @@ export default {
       const phone = this.user.phone;
       const username = this.user.username;
       const password = this.user.password;
+      const role = this.user.role;
 
-      const response = await register(fullname, email, phone, username, password);
+      const response = await register(fullname, email, phone, username, password, role);
       console.warn(response);
       if(response.status === 201){
           alert("Register is completely!")
+          localStorage.setItem("user",JSON.stringify(response.data))
           this.$router.replace({ name: 'Login' });
       }else{
           alert("Try again!")

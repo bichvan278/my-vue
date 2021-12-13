@@ -8,7 +8,7 @@
             <div class="col-md-5 py-5  ">
                 <div class="manager">
                   <p class="speech-bubble">
-                    <router-link :to="{name: 'Login'}">Manager Users </router-link>
+                    <router-link :to="{name: 'viewuser'}">Manager Users </router-link>
                   </p>
                 </div>
                 <div class="manager">

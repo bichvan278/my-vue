@@ -6,39 +6,39 @@
 				<div class="table-title">
 					<div class="row">
 						<div class="col-sm-6">
-							<h2>Manage <b>Books</b></h2>
+							<h2>Manage <b>Users</b></h2>
 						</div>
 						<div class="col-sm-6">
-							<span>
-								<router-link :to="{name: 'addbook'}" >
+							<!-- <span>
+								<router-link :to="{name: 'adduser'}" >
 									<button class="btnAddbook">+ ADD NEW BOOK</button>
 								</router-link>
-							</span>
+							</span> -->
 						</div>
 					</div>
 				</div>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>Tên sách</th>
-							<th>Tác giả</th>
-							<th>Thể loại</th>
-							<th>Ngày xuất bản</th>
+							<th>Tên tài khoản</th>
+							<th>Fullname</th>
+							<th>Email</th>
+							<th>Ngày tạo</th>
 							<th>Action</th>
 
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="b in books" :key="b.id">
-							<td>{{b.value.name}}</td>
-							<td>{{b.value.author}}</td>
-							<td>{{b.value.type}}</td>
-							<td>{{b.value.createAt}}</td>
+						<tr v-for="u in users" :key="u.id">
+							<td>{{u.value.username}}</td>
+							<td>{{u.value.fullname}}</td>
+							<td>{{u.value.email}}</td>
+							<td>{{u.value.createAt}}</td>
 							<td>
-								<router-link :to="{name: 'editbook', params: {id: b.id}}">
+								<router-link :to="{name: 'editbook', params: {id: u.id}}">
 									<b-icon icon="pencil-square" scale="1.2" variant="success"></b-icon>
 								</router-link>
-								<b-button class="btndelete" data-toggle="modal" v-on:click="clickDelete" v-bind:value="b.id">
+								<b-button class="btndelete" data-toggle="modal" v-on:click="clickDelete" v-bind:value="u.id">
 									<b-icon icon="x-square" scale="1.2" variant="danger"></b-icon>
 								</b-button>
 							</td>  
@@ -52,37 +52,33 @@
 </template>
 
 <script>
-import Editbook from './Editbook'
-import {getAllBook, deleteBook} from "@/services/CouchApiService.js"
+import {getAllUser, deleteBook} from "@/services/CouchApiService.js"
 
 export default {
   name: 'viewbook',
   data(){
       return{
-		books: [],
+		users: [],
 		id_del: ''
       }
-},
-	components:{
-		'edit-book': Editbook
-	},
+    },
 	methods: {
 		async clickDelete($event) {
-			this.id_del = $event.currentTarget.value
-            console.log("result:",this.id_del)
-			const id = this.id_del
-            alert("Are you sure to remove it?")
+			// this.id_del = $event.currentTarget.value
+            // console.log("result:",this.id_del)
+			// const id = this.id_del
+            // alert("Are you sure to remove it?")
         
-            const result1 = await deleteBook(id)
-            if(result1.status === 200) {
-                window.location.reload();
-            }
+            // const result1 = await deleteBook(id)
+            // if(result1.status === 200) {
+            //     window.location.reload();
+            // }
 		}
 	},
 	async mounted() {
-		const result = await getAllBook()
+		const result = await getAllUser()
 		console.log("books:",result.data)
-		this.books = result.data
+		this.users = result.data
 	}
 }
 </script>

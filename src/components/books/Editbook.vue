@@ -1,109 +1,106 @@
 <template>
-<div>
-    <b-button v-b-modal.modal-prevent-closing>Open Modal</b-button>
+    <div class="edit-book">
+        <div class="container">
+            <div class="row">
+                <h2 style="color: black">EDIT BOOK</h2>
+                <hr>
+                <div class="col-md-2"></div>
+                <!-- Edit Form -->
+                <div class="col-md-8">
+                  <form action="#" class="frmAddbook" @submit.prevent="frmEditbook">
+                      <div class="form-group">
+                          <label for="usr">Name:</label>
+                          <input required="true" type="text" class="form-control" id="name" v-model="book.name">
+                      </div>
+                      <div class="form-group">
+                          <label for="email">Author:</label>
+                          <input required="true" type="text" class="form-control" id="author" v-model="book.author">
+                      </div>
+                      <div class="form-group">
+                          <label for="email">Type:</label>
+                          <input required="true" type="text" class="form-control" id="type" v-model="book.type">
+                      </div>
+                      <div class="form-group">
+                          <label for="email">Producer:</label>
+                          <input required="true" type="text" class="form-control" id="producer" v-model="book.producer">
+                      </div>
+                      <div class="form-group">
+                          <label for="email">QTY:</label>
+                          <input required="true" type="text" class="form-control" id="qty" v-model="book.amount">
+                      </div>
 
-    <b-modal
-      id="modal-prevent-closing"
-      ref="modal"
-      title="Submit Your Name"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
-    >
-      <form ref="form" @submit.stop.prevent="handleSubmit">
-        <b-form-group label="Name">
-          <b-form-input v-model="book.name"></b-form-input>
-        </b-form-group>
+                      <div class="form-group">
+                          <b-button type="submit" name="btnAdd" class="btnEdit" value="ADD">SAVE</b-button>
+                      </div>
+                  </form>
+                </div>
 
-        <b-form-group label="Auth">
-          <b-form-input v-model="book.auth"></b-form-input>
-        </b-form-group>
-
-        <b-form-group label="Type">
-          <b-form-input v-model="book.type"></b-form-input>
-        </b-form-group>
-
-        <b-form-group label="Date">
-          <b-form-input v-model="book.date"></b-form-input>
-        </b-form-group>
-
-      </form>
-    </b-modal>
-  </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-  export default {
-    props:{
-      edit:{
-        type:Object,
-        default:null
-      }
-    },
-    watch:{
-      edit(){
-        if(this.edit){
-          this.book=Object.assign({}, this.edit)
-        }else{
-          this.book={}
+import {getBook, editBook} from '@/services/CouchApiService.js'
+
+export default {
+    name: 'EditBook',
+    data () {
+      return {
+        book: {
+          name: '',
+          type: '',
+          author: '',
+          producer: '',
+          amount: ''
         }
       }
     },
-    data() {
-      return {
-        book:{
-          name:"",
-          auth:"",
-          type:"",
-          date:"",
-        },
-        name: '',
-        nameState: null,
-        submittedNames: []
-      }
+    async mounted() {
+      const id = this.$route.params.id
+      const result = await getBook(id)
+      console.log("book:",result)
+      this.book = result.data
     },
     methods: {
-      checkFormValidity() {
-        const valid = this.$refs.form.checkValidity()
-        this.nameState = valid
-        return valid
-      },
-      resetModal() {
-        this.name = ''
-        this.nameState = null
-      },
-      handleOk(bvModalEvt) {
-        console.log(this.book)
+      async frmEditbook() {
 
-        this.$emit("save", this.book)
-         this.book={
-          id: Math.floor(Math.random()*1000),
-          name:"",
-          auth:"",
-          type:"",
-          date:"",
+        const id = this.$route.params.id
+        const name = this.book.name
+        const type = this.book.type
+        const author = this.book.author
+        const producer = this.book.producer
+        const amount = this.book.amount
 
+        const response = await editBook(id, name, type, author, producer, amount)
+        console.log('edit book:', response)
+        if (response.status === 200) {
+            alert('Change successful!')
+            this.$router.replace({ name: 'viewbook' });
+        } else {
+            alert('Try again!')
         }
-        // Prevent modal from closing
-        bvModalEvt.preventDefault()
-        // Trigger submit handler
-        this.handleSubmit()
-      },
-      handleSubmit() {
-        // Exit when the form isn't valid
-        if (!this.checkFormValidity()) {
-          return
-        }
-        // Push the name to submitted names
-        this.submittedNames.push(this.name)
-        // Hide the modal manually
-        this.$nextTick(() => {
-          this.$bvModal.hide('modal-prevent-closing')
-        })
       }
     }
-  }
+}
 </script>
 
 <style>
+.btnEdit
+{
+    width: 10%;
+    border-radius: 1rem;
+    padding: 1%;
+    color: #fff;
+    background-color: #0062cc;
+    border: none;
+    cursor: pointer;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.frmEditbook{
+    width: 60%;
+    margin: 10px 220px;
+}
 </style>

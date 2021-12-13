@@ -4,9 +4,10 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import AdminPage from '@/components/User/AdminPage'
+import ViewUser from '@/components/User/ViewUser'
 import viewbook from '@/components/books/viewbook'
+import AddBook from '@/components/books/AddBook'
 import Editbook from '@/components/books/Editbook'
-
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       component: Register
     },
     {
+      path: '/viewusers',
+      name: 'viewuser',
+      component: ViewUser
+    },
+    {
       path: '/AdminPage',
       name: 'AdminPage',
       component: AdminPage
@@ -39,8 +45,13 @@ export default new Router({
       component: viewbook
     },
     {
-      path: '/Editbook',
-      name: 'Editbook',
+      path: '/AddBook',
+      name: 'addbook',
+      component: AddBook
+    },
+    {
+      path: '/Editbook/:id',
+      name: 'editbook',
       component: Editbook
     }
   ]

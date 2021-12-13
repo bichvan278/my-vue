@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import {login} from "@/services/CouchApiService.js"
+
 export default {
   name: 'Login',
   data(){
@@ -34,22 +36,32 @@ export default {
       const username = this.user.username;
       const password = this.user.password;
 
-      try {
-          if(username === 'lanpui' && password === 'lanpuibanhwet') {
-              alert('Admin is login succesful!')
-              this.$router.replace({ name: 'AdminPage' });
-          }else if(username === 'lienlien' && password === 'lien123'){
-              alert('Librarian is login succesful!')
-              this.$router.replace({ name: 'AdminPage' });
-          }else if(username === 'henry' && password === 'henry123'){
-              alert('Reader is login succesful!')
-              this.$router.replace({ name: 'HelloWorld' });
-          }else {
-              alert('ACC is not available!')
-          }
-      }catch (e) {
-          console.log(e)
+      const result = await login(username, password);
+      if(result.status === 200){
+          console.log("login",result)
+          alert('Login successful!');
+          localStorage.setItem("user",JSON.stringify(result.data))
+          this.$router.replace({ name: 'HelloWorld' });
+      }else{
+          alert("Try again!")
       }
+
+      // try {
+      //     if(username === 'lanpui' && password === 'lanpuibanhwet') {
+      //         alert('Admin is login succesful!')
+      //         this.$router.replace({ name: 'AdminPage' });
+      //     }else if(username === 'lienlien' && password === 'lien123'){
+      //         alert('Librarian is login succesful!')
+      //         this.$router.replace({ name: 'AdminPage' });
+      //     }else if(username === 'henry' && password === 'henry123'){
+      //         alert('Reader is login succesful!')
+      //         this.$router.replace({ name: 'HelloWorld' });
+      //     }else {
+      //         alert('ACC is not available!')
+      //     }
+      // }catch (e) {
+      //     console.log(e)
+      // }
     }
   }
 }
