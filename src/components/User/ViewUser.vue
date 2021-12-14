@@ -64,9 +64,9 @@ export default {
     },
 	methods: {
 		async clickDelete($event) {
-			// this.id_del = $event.currentTarget.value
-            // console.log("result:",this.id_del)
-			// const id = this.id_del
+			this.id_del = $event.currentTarget.value
+            console.log("result:",this.id_del)
+			const id = this.id_del
             // alert("Are you sure to remove it?")
         
             // const result1 = await deleteBook(id)

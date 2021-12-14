@@ -25,6 +25,10 @@ export const getAllUser = async () => (
     await instance.get('/users')
 );
 
+export const deleteUser = async (id) => (
+    await instance.delete(`/user/delete/${id}`)
+);
+
 // Books
 export const getAllBook = async () => (
     await instance.get('/booklist')
