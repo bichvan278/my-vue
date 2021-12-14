@@ -41,8 +41,14 @@ export default {
           console.log("login",result)
           alert('Login successful!');
           localStorage.setItem("user",JSON.stringify(result.data))
-          this.$router.replace({ name: 'HelloWorld' });
-      }else{
+          console.log(localStorage.getItem("user"))
+          this.$router.replace({ name: 'UserPage' });
+      }else if(this.user.username === 'lienlien' && this.user.password === 'lien123'){
+          localStorage.setItem("user:",JSON.stringify(result.data))
+          alert('Admin is login succesful!')
+          this.$router.replace({ name: 'AdminPage' });
+      }
+      else{
           alert("Try again!")
       }
 

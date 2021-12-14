@@ -2,18 +2,15 @@
   <div id="app">
     <pageHeader/>
     <router-view/>
-    <pageFooter/>
   </div>
 </template>
 
 <script>
 import pageHeader from '@/components/Page/PageHeader'
-import pageFooter from '@/components/Page/PageFooter'
 export default {
   name: 'App',
   components: {
-    pageHeader,
-    pageFooter
+    pageHeader
   }
 }
 </script>

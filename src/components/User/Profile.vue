@@ -1,81 +1,79 @@
 <template>
- <section class="testimonial py-5" id="testimonial">
-    <div class="container">
-        <div class="row ">
-            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                <div class="card h-100">
-                    <div class="card-body">
-                    <div class="account-settings">
-                        <div class="user-profile">
-                        <div class="">
-                            <img src="@/assets/book rev.png" alt="Maxwell Admin">
+    <section class="testimonial py-5" id="testimonial">
+        <div class="container">
+            <div class="row ">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <div class="card h-100">
+                        <div class="card-body">
+                            <div class="account-settings">
+                            <div class="user-profile">
+                                <div class="user-avatar">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+                                </div>
+                                <h5 class="user-name">Yuki Hayashi</h5>
+                                <h6 class="user-email">yuki@Maxwell.com</h6>
+                            </div>
+                            </div>
                         </div>
-                        <h5 class="user-name">{{book.name}}</h5>
-                        <h6 class="user-email">{{book.author}}</h6>
                         </div>
-                    </div>
-                    </div>
                 </div>
-            </div>
-            <div class="col-md-8 py-5 border">
-                <h1 class="pb-4">Book Details</h1>
-                <div id="formContent">
-                    <!-- Login Form -->
-                    <form>
+                <div class="col-md-8 py-5 border">
+                    <h1 class="pb-4">Personal Details</h1>
+                    <div id="formContent">
+                        <!-- Login Form -->
+                        <form>
                         <div  class="row">
                             <div class="form-group col-lg-6">
-                                <label for="fullName">Quantity: {{book.amount}}</label> 
-                                <label for="fullName">Auth: {{book.author}}</label> 
+                                <label for="fullName">Full name: Nguyen Ngoc Luyen</label> 
+                                <label for="fullName">Street: Nguyen Van Linh</label> 
 
                             </div>
                             <div class="form-group col-lg-6">
-                                <label for="fullName">Type: {{book.type}}</label> 
-                                <label for="fullName">Published: {{book.createAt}}</label>
+                                <label for="fullName">Phone: 0582384059</label> 
+                                <label for="fullName">City: Can Tho</label> 
+
                             </div>
+                            
+                            
                         </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 </template>
 
 <script>
-import {getBook} from "@/services/CouchApiService.js"
-
 export default {
-    name: 'Detail',
-    data() {
-        return {
-            book: {
-                name: '',
-                type: '',
-                author: '',
-                producer: '',
-                amount: '',
-                createAt: ''
-            }
+    name: 'Profile',
+    data(){
+        return{
+            user:[{}],
+            info:[
+                {	
+                    id :1,
+                    name: 'Nguyen Ngoc Luyen',
+                    email:'luyen@gmail.com',
+                    street:'Nguyen van linh',
+                    city:'Can tho',
+                    phone: '058585858'
+                }
+            ],
         }
     },
     async mounted() {
-        const id = this.$route.params.id
-        const result = await getBook(id)
-        console.log("book:",result)
-        this.book = result.data
+        if(localStorage.getItem("user") !== null){
+            this.user = localStorage.getItem("user")
+            console.log("profile",this.user)
+            const test = this.user.docs
+            console.log("test", test)
+        }
     }
 }
 </script>
 
 <style scoped>
-img {
-    background-image: none;
-    margin-right: 20px;
-    margin-top: 10px;
-    margin-left: -64px;
-    width: 380px;
-    height: 350px;
-}
 h1 {
   text-align: center;
   font-size: 16px;

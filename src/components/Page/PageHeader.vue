@@ -14,13 +14,30 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="#">
+        <router-link :to="{name: 'UserPage'}">
+          Book
+        </router-link>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="#">
+        <router-link :to="{name: 'profile'}">
+          Profile
+        </router-link>
+      </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
+    <li class="nav-item" v-if="user === null">
+      <a class="nav-link" href="#">
+        <router-link :to="{name: 'Login'}">
+          Log in
+        </router-link>
+      </a>
+    </li>
+    <li class="nav-item" v-if="user !== null">
+      <b-button v-on:click="rmvLogout" type="submit" style="margin-top: 6px;">
+        Log out
+      </b-button>
     </li>
   </ul>
 </nav>
@@ -28,7 +45,23 @@
 
 <script>
 export default {
-  name: 'pageHeader'
+  name: 'pageHeader',
+  data() {
+    return {
+      user: null
+    }
+  },
+  async mounted() {
+    this.user = localStorage.getItem("user")
+  },
+  methods: {
+    async rmvLogout() {
+      localStorage.removeItem('user');
+      localStorage.removeItem('role');
+      alert("Logout successful!")
+      this.$router.replace({ name: 'Login' });
+    }
+  }
 }
 </script>
 

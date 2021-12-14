@@ -35,9 +35,9 @@
 							<td>{{u.value.email}}</td>
 							<td>{{u.value.createAt}}</td>
 							<td>
-								<router-link :to="{name: 'editbook', params: {id: u.id}}">
+								<!-- <router-link :to="{name: 'editbook', params: {id: u.id}}">
 									<b-icon icon="pencil-square" scale="1.2" variant="success"></b-icon>
-								</router-link>
+								</router-link> -->
 								<b-button class="btndelete" data-toggle="modal" v-on:click="clickDelete" v-bind:value="u.id">
 									<b-icon icon="x-square" scale="1.2" variant="danger"></b-icon>
 								</b-button>
@@ -67,12 +67,12 @@ export default {
 			this.id_del = $event.currentTarget.value
             console.log("result:",this.id_del)
 			const id = this.id_del
-            // alert("Are you sure to remove it?")
+            alert("Are you sure to remove it?")
         
-            // const result1 = await deleteBook(id)
-            // if(result1.status === 200) {
-            //     window.location.reload();
-            // }
+            const result1 = await deleteUser(id)
+            if(result1.status === 200) {
+                window.location.reload();
+            }
 		}
 	},
 	async mounted() {
