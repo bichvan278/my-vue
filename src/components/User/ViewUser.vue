@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import {getAllUser, deleteBook} from "@/services/CouchApiService.js"
+import {getAllUser, deleteUser} from "@/services/CouchApiService.js"
 
 export default {
   name: 'viewbook',

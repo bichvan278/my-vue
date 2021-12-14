@@ -59,7 +59,7 @@ export default {
       localStorage.removeItem('user');
       localStorage.removeItem('role');
       alert("Logout successful!")
-      this.$router.replace({ name: 'Login' });
+      this.$router.replace({ name: 'HomePage' });
     }
   }
 }

@@ -36,17 +36,19 @@ export default {
       const username = this.user.username;
       const password = this.user.password;
 
-      const result = await login(username, password);
-      if(result.status === 200){
-          console.log("login",result)
-          alert('Login successful!');
-          localStorage.setItem("user",JSON.stringify(result.data))
-          console.log(localStorage.getItem("user"))
-          this.$router.replace({ name: 'UserPage' });
-      }else if(this.user.username === 'lienlien' && this.user.password === 'lien123'){
-          localStorage.setItem("user:",JSON.stringify(result.data))
+      if(username === 'lienlien' && password === 'lien123'){
+          localStorage.setItem("user:",JSON.stringify(username,password))
           alert('Admin is login succesful!')
           this.$router.replace({ name: 'AdminPage' });
+      }else if(username !== 'lienlien' && password !== 'lien123') {
+        const result = await login(username, password);
+        if(result.status === 200){
+            console.log("login",result)
+            alert('Login successful!');
+            localStorage.setItem("user",JSON.stringify(result.data))
+            console.log(localStorage.getItem("user"))
+            this.$router.replace({ name: 'UserPage' });
+        }
       }
       else{
           alert("Try again!")

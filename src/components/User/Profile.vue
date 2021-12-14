@@ -1,7 +1,7 @@
 <template>
     <section class="testimonial py-5" id="testimonial">
         <div class="container">
-            <div class="row ">
+            <div class="row " v-for="u in user" :key="u._id">
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                         <div class="card h-100">
                         <div class="card-body">
@@ -10,8 +10,8 @@
                                 <div class="user-avatar">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
                                 </div>
-                                <h5 class="user-name">Yuki Hayashi</h5>
-                                <h6 class="user-email">yuki@Maxwell.com</h6>
+                                <h5 class="user-name">{{info.username}}</h5>
+                                <h6 class="user-email">{{info.email}}</h6>
                             </div>
                             </div>
                         </div>
@@ -24,13 +24,13 @@
                         <form>
                         <div  class="row">
                             <div class="form-group col-lg-6">
-                                <label for="fullName">Full name: Nguyen Ngoc Luyen</label> 
-                                <label for="fullName">Street: Nguyen Van Linh</label> 
+                                <label for="fullName">Full name: {{info.name}}</label> 
+                                <label for="fullName">Street: {{info.street}}</label> 
 
                             </div>
                             <div class="form-group col-lg-6">
-                                <label for="fullName">Phone: 0582384059</label> 
-                                <label for="fullName">City: Can Tho</label> 
+                                <label for="fullName">Phone: {{info.phone}}</label> 
+                                <label for="fullName">City: {{info.city}}</label> 
 
                             </div>
                             
@@ -50,24 +50,24 @@ export default {
     data(){
         return{
             user:[{}],
-            info:[
+            info:
                 {	
                     id :1,
+                    username: 'lienlien',
                     name: 'Nguyen Ngoc Luyen',
                     email:'luyen@gmail.com',
                     street:'Nguyen van linh',
                     city:'Can tho',
                     phone: '058585858'
                 }
-            ],
         }
     },
     async mounted() {
         if(localStorage.getItem("user") !== null){
             this.user = localStorage.getItem("user")
             console.log("profile",this.user)
-            const test = this.user.docs
-            console.log("test", test)
+            // const test = {docs}
+            // console.log("test", test)
         }
     }
 }
