@@ -1,7 +1,7 @@
 <template>
     <section class="testimonial py-5" id="testimonial">
         <div class="container">
-            <div class="row " v-for="u in user" :key="u._id">
+            <div class="row ">
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                         <div class="card h-100">
                         <div class="card-body">
